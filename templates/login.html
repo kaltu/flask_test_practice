@@ -1,0 +1,39 @@
+<html lang="en-us">
+<head>
+    <title>Login page</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        const userRequest = axios.create({
+            baseURL: 'http://localhost/user/'
+        });
+        const apiUserLogin = data => userRequest.post('/signIn', data);
+
+        doLogin = function () {
+            document.getElementById('status').hidden = true;
+            const formData = new FormData();
+            formData.append("username", document.getElementById('username').value);
+            formData.append("password", document.getElementById('password').value);
+
+            apiUserLogin(formData)
+                .then(res => {
+                    console.log(res);
+                    document.getElementById('status').hidden = false;
+                    document.getElementById('msg').innerHTML = res.data['msg'];
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    </script>
+</head>
+<body>
+<form>
+    <label><b>Username</b></label>
+        <input type="text" placeholder="Username" id="username" value="{{ request.form.username }}">
+    <label><b>Password</b></label>
+        <input type="password" placeholder="Password" id="password" value="{{ request.form.password }}">
+    <input type="submit" id="submit" value="Login" formaction="javascript:doLogin();">
+</form>
+<p id="status" hidden><strong>Status:</strong> <span id="msg"></span></p>
+</body>
+</html>
