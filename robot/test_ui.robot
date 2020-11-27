@@ -38,9 +38,16 @@ check wrong credential
   wait and click  id=submit
   wait and check  id=msg  login failed
 
+check blank fields
+  wait and click  id=submit
+  wait and check  id=msg  login failed
+
 *** Test Cases ***
 Open browser and run
   open the browser
+
+Check blank
+  check blank fields
 
 Check login
   check login

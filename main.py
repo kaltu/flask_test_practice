@@ -1,9 +1,9 @@
+# main.py
 from flask import Flask, render_template, request, url_for, redirect, jsonify, abort
-from flask_restful import Api
+from flask_cors import cross_origin
 import requests
 
 app = Flask(__name__)
-api = Api(app)
 
 
 @app.route('/')
@@ -23,6 +23,7 @@ def login_page():
 
 
 @app.route('/user/signIn', methods=['POST'])
+@cross_origin()  # add cors support for issue ["127.0.0.1" vs "localhost" cross origin]
 def login_api():
     if request.method == 'POST':
         if not request.form:
