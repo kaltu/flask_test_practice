@@ -54,3 +54,6 @@ Check login
 
 Check wrong
   check wrong credential
+
+Close browser and end test
+  Close Browser

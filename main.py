@@ -26,7 +26,7 @@ def login_page():
 @cross_origin()  # add cors support for issue ["127.0.0.1" vs "localhost" cross origin]
 def login_api():
     if request.method == 'POST':
-        if not request.form:
+        if not request.form or 'username' not in request.form or 'password' not in request.form:
             return abort(400)
         # if request.form['username'] == 'admin' and request.form['password'] == 'admin':
         if check_credential(request.form['username'], request.form['password']):
